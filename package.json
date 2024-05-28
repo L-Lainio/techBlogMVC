@@ -1,0 +1,20 @@
+{
+  "name": "techblogmvc",
+  "version": "1.0.0",
+  "description": "techBlogMVC",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/L-Lainio/techBlogMVC.git"
+  },
+  "author": "LLainio",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/L-Lainio/techBlogMVC/issues"
+  },
+  "homepage": "https://github.com/L-Lainio/techBlogMVC#readme"
+}
