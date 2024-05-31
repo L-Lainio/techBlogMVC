@@ -1,7 +1,7 @@
-const router = require("express").Router();
-const { Comment } = require("../../models");
-const withAuth = require("../../utils/auth");
-router.get("/", async (req, res) => {
+const router = require('express').Router();
+const { Comment } = require('../../models');
+const withAuth = require('../../utils/auth');
+router.get('/', async (req, res) => {
 	try {
 		const findComments = await Comment.findAll({});
 		const foundComments = await findComments;
@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
 	}
 });
 
-router.get("/:id", async (req, res) => {
+router.get('/:id', async (req, res) => {
 	try {
 		const findCommentByID = await Comment.findAll({
 			where: {
@@ -29,7 +29,7 @@ router.get("/:id", async (req, res) => {
 	}
 });
 
-router.post("/", withAuth, async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
 	if (req.session) {
 		try {
 			const createNewComment = await Comment.create({
@@ -47,7 +47,7 @@ router.post("/", withAuth, async (req, res) => {
 	}
 });
 
-router.put("/:id", withAuth, async (req, res) => {
+router.put('/:id', withAuth, async (req, res) => {
 	try {
 		const updateComment = await Comment.update(
 			{
@@ -62,7 +62,7 @@ router.put("/:id", withAuth, async (req, res) => {
 
 		const updatedComment = await updateComment;
 		if (!updatedComment) {
-			res.status(404).json({ message: "No comment found with this id" });
+			res.status(404).json({ message: 'No comment found with this id' });
 			return;
 		}
 		res.json(updatedComment);
@@ -72,7 +72,7 @@ router.put("/:id", withAuth, async (req, res) => {
 	}
 });
 
-router.delete("/:id", withAuth, async (req, res) => {
+router.delete('/:id', withAuth, async (req, res) => {
 	try {
 		const deleteComment = await Comment.destroy({
 			where: {
@@ -82,7 +82,7 @@ router.delete("/:id", withAuth, async (req, res) => {
 
 		const deletedComment = await deleteComment;
 		if (!deletedComment) {
-			res.status(404).json({ message: "No comment found with this id" });
+			res.status(404).json({ message: 'No comment found with this id' });
 			return;
 		}
 		res.json(deletedComment);

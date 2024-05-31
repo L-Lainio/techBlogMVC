@@ -1,6 +1,6 @@
-const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../config/connection");
-const bcrypt = require("bcrypt");
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection');
+const bcrypt = require('bcrypt');
 
 // create our User model
 class User extends Model {
@@ -17,7 +17,7 @@ User.init(
         id: {
             // use the special Sequelize DataTypes object provide what type of data it is
             type: DataTypes.INTEGER,
-            // equivalent of SQL "NOT NULL"
+            // equivalent of SQL 'NOT NULL'
             allowNull: false,
             // instruct that this is the Primary Key
             primaryKey: true,
@@ -67,7 +67,7 @@ User.init(
         // use underscores instead of camel-casing (i.e. `comment_text` and not `commentText`)
         underscored: true,
         // make it so our model name stays lowercase in the database
-        modelName: "user",
+        modelName: 'user',
     }
 );
 

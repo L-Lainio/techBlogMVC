@@ -1,6 +1,6 @@
-const { Model, DataTypes } = require("sequelize");
-const bcrypt = require("bcrypt");
-const sequelize = require("module");
+const { Model, DataTypes } = require('sequelize');
+const bcrypt = require('bcrypt');
+const sequelize = require('module');
 
 class User extends Model {
     checkPassword(loginPw) {
@@ -46,7 +46,7 @@ constructor(
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: "user",
+        modelName: 'user',
     }
 );
 

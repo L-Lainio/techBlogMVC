@@ -1,8 +1,8 @@
-const router = require("express").Router();
-const { User, Post, Comment } = require("../../models");
-router.get("/", (req, res) => {
+const router = require('express').Router();
+const { User, Post, Comment } = require('../../models');
+router.get('/', (req, res) => {
 	User.findAll({
-		attributes: { exclude: ["[password"] },
+		attributes: { exclude: ['[password'] },
 	})
 		.then((dbUserData) => res.json(dbUserData))
 		.catch((err) => {
@@ -11,35 +11,35 @@ router.get("/", (req, res) => {
 		});
 }); //routes to actual user pages, excludes returning their pwd for security.
 
-router.get("/:id", (req, res) => {
+router.get('/:id', (req, res) => {
 	User.findOne({
-		attributes: { exclude: ["password"] },
+		attributes: { exclude: ['password'] },
 		where: {
 			id: req.params.id,
 		},
 		include: [
 			{
 				model: Post,
-				attributes: ["id", "title", "content", "created_at"],
+				attributes: ['id', 'title', 'content', 'created_at'],
 			},
 
 			{
 				model: Comment,
-				attributes: ["id", "comment_text", "created_at"],
+				attributes: ['id', 'comment_text', 'created_at'],
 				include: {
 					model: Post,
-					attributes: ["title"],
+					attributes: ['title'],
 				},
 			},
 			{
 				model: Post,
-				attributes: ["title"],
+				attributes: ['title'],
 			},
 		],
 	}) //search users by ID, returns the attached comments and posts
 		.then((dbUserData) => {
 			if (!dbUserData) {
-				res.status(404).json({ message: "No user found with this id" });
+				res.status(404).json({ message: 'No user found with this id' });
 				return; //if no user found
 			}
 			res.json(dbUserData);
@@ -50,7 +50,7 @@ router.get("/:id", (req, res) => {
 		});
 });
 
-router.post("/", (req, res) => {
+router.post('/', (req, res) => {
 	User.create({
 		username: req.body.username,
 		password: req.body.password,
@@ -71,7 +71,7 @@ router.post("/", (req, res) => {
 		});
 });
 
-router.post("/login", (req, res) => {
+router.post('/login', (req, res) => {
 	User.findOne({
 		where: {
 			username: req.body.username,
@@ -79,13 +79,13 @@ router.post("/login", (req, res) => {
 	})
 		.then((dbUserData) => {
 			if (!dbUserData) {
-				res.status(400).json({ message: "No user with that username!" });
+				res.status(400).json({ message: 'No user with that username!' });
 				return; //no user, 400 error
 			}
 			const validPassword = dbUserData.checkPassword(req.body.password);
 
 			if (!validPassword) {
-				res.status(400).json({ message: "Incorrect password!" });
+				res.status(400).json({ message: 'Incorrect password!' });
 				return; //wrong pass? error, I know this is bad but w/e
 			}
 			req.session.save(() => {
@@ -93,7 +93,7 @@ router.post("/login", (req, res) => {
 				req.session.username = dbUserData.username; //as above sets session ids
 				req.session.loggedIn = true; //all good, logged in
 
-				res.json({ user: dbUserData, message: "You are now logged in!" });
+				res.json({ user: dbUserData, message: 'You are now logged in!' });
 			});
 		})
 		.catch((err) => {
@@ -102,7 +102,7 @@ router.post("/login", (req, res) => {
 		});
 });
 
-router.post("/logout", (req, res) => {
+router.post('/logout', (req, res) => {
 	if (req.session.loggedIn) {
 		//if logged in, destroy session
 		req.session.destroy(() => {
@@ -113,7 +113,7 @@ router.post("/logout", (req, res) => {
 	}
 });
 
-router.put("/:id", (req, res) => {
+router.put('/:id', (req, res) => {
 	User.update(req.body, {
 		individualHooks: true,
 		where: {
@@ -122,7 +122,7 @@ router.put("/:id", (req, res) => {
 	})
 		.then((dbUserData) => {
 			if (!dbUserData[0]) {
-				res.status(404).json({ message: "No user found with this id" });
+				res.status(404).json({ message: 'No user found with this id' });
 				return;
 			}
 			res.json(dbUserData);
@@ -133,7 +133,7 @@ router.put("/:id", (req, res) => {
 		});
 });
 
-router.delete("/:id", (req, res) => {
+router.delete('/:id', (req, res) => {
 	User.destroy({
 		where: {
 			id: req.params.id,
@@ -141,7 +141,7 @@ router.delete("/:id", (req, res) => {
 	})
 		.then((dbUserData) => {
 			if (!dbUserData) {
-				res.status(404).json({ message: "No user found with this id" });
+				res.status(404).json({ message: 'No user found with this id' });
 				return;
 			}
 			res.json(dbUserData); //formally updates
