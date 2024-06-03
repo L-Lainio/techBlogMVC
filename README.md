@@ -4,10 +4,13 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Contributor Covenant](https://img.shields.io/badge/Lora-Lainio-4baaaa.svg)](code_of_conduct.md)
 
 ## My GIF
-<!-- ![](<--add link here--> -->
+![](/images/Zight%20Recording%202024-5-20%20at%2011.44.34%20PM.gif)
 
 ## My Screenshot
-<!-- ![](<--add link here--> -->
+![](/images/Zight%202024-5-20%20at%2011.48.55%20PM.png)
+![](/images/logo.svg)
+![](/images/circleSVG.svg)
+![](/images/logo%20(1).svg)
 
 ## Description
 
