@@ -1,16 +1,18 @@
-const User = require('module');
-const Post = require('module');
-const Comment = require('module');
-const sequelize = require('module');
+const User = require('./User');
+const Post = require('./Post');
+const Comment = require('./Comments');
+const { Sequelize } = require('sequelize');
+const sequelize = new Sequelize('userData');
 
-function getUserData() {
-    // Add your code here to fetch user data
-}
 
-getUserData();
+function commentPost() {
 Post.belongsTo(User, {
     foreignKey: 'user_id',
     onDelete: 'cascade',
+});
+Post.hasMany(Comment, {
+    foreignKey: 'postId',
+    onDelete: 'CASCADE'
 });
 
 Comment.belongsTo(User, {
@@ -32,5 +34,5 @@ Post.hasMany(Comment, {
     foreignKey: 'post_id',
     onDelete: 'cascade',
 });
-
+}
 module.exports = { User, Post, Comment };

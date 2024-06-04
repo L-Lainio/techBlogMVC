@@ -1,6 +1,5 @@
-seed.js
 
-const sequelize = require('../config/config');
+const sequelize = require('../config/connection');
 
 // Import all models
 const { User, Post, Comment } = require('../models');
@@ -54,4 +53,3 @@ const seedDatabase = async () => {
 
 // Call the seeding function
 seedDatabase();
-

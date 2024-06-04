@@ -2,21 +2,21 @@ const { Comment } = require('../models');
 
 const commentData = [
     {
-        comment_text: 'What is MVC Framework?',
-        user_id: 1,
+        content: "MVC is the best ever!",
         post_id: 1,
+        user_id: 1
     },
     {
-        comment_text: 'What are the Cookies?',
-        user_id: 2,
+        content: "OOP is very handy!",
         post_id: 2,
+        user_id: 2
     },
     {
-        comment_text: 'What is a template engine?',
-        user_id: 3,
+        content: "I enjoy this!",
         post_id: 3,
-    },
-];
+        user_id: 3
+    }
+]
 
 const seedComments = () => Comment.bulkCreate(commentData);
 

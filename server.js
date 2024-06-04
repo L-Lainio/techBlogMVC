@@ -19,7 +19,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Set up Handlebars.js as the default engine with custom helpers
-const hbs = exphbs.create({ helpers });
+// const helpers = exphbs.create('helpers');
 
 // Sets up session and connect to our Sequelize db
 // Configure and link a session object with the sequelize store
@@ -46,20 +46,17 @@ const sess = {
 // Add express-session and store as Express.js middleware
 app.use(session(sess));
 
-// Inform Express.js on which template engine to use
+const hbs = exphbs.create({ helpers });
+
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
-// Middleware for parsing JSON and urlencoded form data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// Static middleware pointing to the public folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Servers the routes to the server
 app.use(routes);
 
-// Starts the server to begin listening
 sequelize.sync({ force: false }).then(() => {
-    app.listen(PORT, () => console.log(`Now listening on http://localhost:${PORT}`));
+    app.listen(PORT, () => console.log('Now listening'));
 });
