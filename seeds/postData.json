@@ -1,14 +1,17 @@
 [
   {
-    "title": "Music Near Me",
-    "body": "A mobile app that will send you notifications whenever a concert is playing in your area."
+    "title": "Why MVC is so important",
+    "contents": "MVC allows developers to maintain a true separation of concerns, devising their code between the Model layer for data, the View layer for design, and the Controller layer for application logic.",
+    "user_id": "1"
   },
   {
-    "title": "The Ultimate Tech Quiz",
-    "body": "A web app that will give users 10 new technical questions each day and track their progress in things like programming, cybersecurity, database architecture, and more!"
+    "title": "Authentication vs. Authorization",
+    "contents": "There is a difference between authentication and authorization.  Authentication means confirming your own identity, whereas authorization means being allowed access to the system.",
+    "user_id": "2"
   },
   {
-    "title": "Roll 'Em Up",
-    "body": "A game for Windows and macOS where players move a ball through a series of increasingly challenging mazes."
+    "title": "Object-Relational Mapping",
+    "contents": "I have really loved learning about ORMs.  It's a really simplified the way I create queries in SQL!",
+    "user_id": "3"
   }
 ]
