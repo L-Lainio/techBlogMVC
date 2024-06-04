@@ -1,4 +1,4 @@
-const sequelize = require('../config/connection');
+const sequelize = require('../conf/connections');
 const { Post, User, Comment } = require('../models');
 const router = require('express').Router();
 //the get request for the main page.

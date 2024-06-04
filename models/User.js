@@ -1,5 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-    const user = asyncSequelize.define('users', {
+
+    const User = sequelize.define('User', {
         id: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -7,11 +8,11 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
         },
 
-        phoneNumber: {
-            type: DataTypes.STRING(20),
-            allowNull: false,
-            unique: true
-        },
+        // phoneNumber: {
+        //     type: DataTypes.STRING(20),
+        //     allowNull: false,
+        //     unique: true
+        // },
 
         displayName: {
             type: DataTypes.STRING,

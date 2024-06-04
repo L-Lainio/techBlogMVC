@@ -1,4 +1,4 @@
-const sequelize = require('../config/connection');
+const sequelize = require('../conf/connections');
 
 // Import all models
 const { User, Post, Comment } = require('../models');
