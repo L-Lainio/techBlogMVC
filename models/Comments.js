@@ -19,8 +19,6 @@ const newPost = sequelize.define('newPost', {
     }
 });
 
-module.exports = Post;
-
 // Synchronize the model with the database
 sequelize.sync()
     .then(() => {
