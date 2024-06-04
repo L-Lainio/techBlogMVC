@@ -14,13 +14,10 @@ if (process.env.JAWSDB_URL) {
 		process.env.DB_PW,
 		{
 			host: 'localhost',
-			dialect: 'mysql',
-			port: 3306,
+			dialect: 'sequelize',
+			port: 3001,
 		},
 	);
 }
 
 module.exports = sequelize;
-
-
-

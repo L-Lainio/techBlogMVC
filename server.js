@@ -10,6 +10,7 @@ const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 // Initialize an instance of Express.js
+// Move the declaration of 'app' outside of the selection
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -27,12 +28,13 @@ const sess = {
     store: new SequelizeStore({
         db: sequelize,
     }),
-},
+};
 
-// Add express-session and store as Express.js middleware
-app.use(session(sess));
+// Move the declaration of 'app' outside of the selection
+app.set(session(sess));
 app.use(express.urlencoded({ extended: true }));
 app.engine('handlebars', hbs.engine);
+
 app.use(express.json());
 app.set('view engine', 'handlebars');
 app.use(express.static(path.join(__dirname, 'public')));
