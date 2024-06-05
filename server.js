@@ -33,7 +33,7 @@ const sess = {
 // Move the declaration of 'app' outside of the selection
 app.set(session(sess));
 app.use(express.urlencoded({ extended: true }));
-app.engine('handlebars', hbs.engine);
+app.engine('handlebars', exphbs.engine);
 
 app.use(express.json());
 app.set('view engine', 'handlebars');
