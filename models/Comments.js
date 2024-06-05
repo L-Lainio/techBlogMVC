@@ -6,7 +6,7 @@ const sequelize = require('../conf/connections.js');
 const { Sequelize } = require('sequelize');
 const newSequelize = new Sequelize({
     host: 'localhost',
-    dialect: 'mysql'
+    dialect: 'postgres'
 });
 
 // Define the Post model
