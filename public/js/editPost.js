@@ -1,34 +1,23 @@
-async function editFormHandler(event) {
-    event.preventDefault();
+const editPost = async (e) => {
+    e.preventDefault();
+    const urlString = window.location.toString().split('/')
+    const postId = urlString[4];
 
-    const title = document.querySelector('input[name="post-title"]').value.trim();
-    const content = document.querySelector('input[name="content"]').value.trim();
-    console.log(title);
-    console.log(content);
+    const contents = $('#content-textarea').val();
+    const title = $('#title-input').val();
 
-    const id = window.location.toString().split("/")[
-        window.location.toString().split("/").length - 1
-    ];
-
-    const response = await fetch(`/api/posts/${id}`, {
-        method: "PUT",
-        body: JSON.stringify({
-            post_id: id,
-            title,
-            content,
-        }),
-        headers: {
-            "Content-Type": "application/json",
-        },
+    const response = await fetch(`/api/post/${postId}`, {
+        method: 'PUT',
+        body: JSON.stringify({ title, contents }),
+        headers: { 'Content-Type': 'application/json' }
     });
 
     if (response.ok) {
-        document.location.replace("/dashboard/");
+        alert('Post Updated')
+        document.location.replace('/dashboard');
     } else {
-        alert(response.statusText);
+        alert(`I'm sorry but I've ran into an issue while attempting to update your post.`);
     }
 }
 
-document
-    .querySelector(".edit-post-form")
-    .addEventListener("submit", editFormHandler);
+$('#update-post').click(editPost);

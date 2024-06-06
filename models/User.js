@@ -1,35 +1,3 @@
-/*module.exports = (sequelize, DataTypes) => {
-
-    const User = sequelize.define('User', {
-        id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            autoIncrement: true,
-            primaryKey: true,
-        },
-
-        // phoneNumber: {
-        //     type: DataTypes.STRING(20),
-        //     allowNull: false,
-        //     unique: true
-        // },
-
-        displayName: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true
-        }
-    })
-
-    user.association = model => {
-        user.hasMany(model.currencyWallet);
-
-        user.hasMany(model.userSetting);
-
-    }
-    return user
-} */
-
 const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
 const sequelize = require('../conf/connections');

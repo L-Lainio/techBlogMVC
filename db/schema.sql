@@ -7,15 +7,16 @@ CREATE DATABASE techblog_db;
 -- Uses the techblog_db database –
 \c techblog_db;
 
--- Define the schema for the database
-CREATE TABLE posts
-    post_id SERIAL PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    content TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- i think i was confusing this with other assignement
+-- -- Define the schema for the database
+-- CREATE TABLE posts
+--     post_id SERIAL PRIMARY KEY,
+--     title VARCHAR(255) NOT NULL,
+--     content TEXT,
+--     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
-Comments Table Schema:
+-- Comments Table Schema:
 
-CREATE TABLE comments
-    comment_id SERIAL PRIMARY KEY,
-    post_id INT REFERENCES posts(post_id)
+-- CREATE TABLE comments
+--     comment_id SERIAL PRIMARY KEY,
+--     post_id INT REFERENCES posts(post_id)
