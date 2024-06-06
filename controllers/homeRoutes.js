@@ -5,30 +5,13 @@ const router = require('express').Router();
 router.get('/', async (req, res) => {
 	try {
 		const findPosts = await Post.findAll({
-			attributes: ['id', 'title', 'content', 'created_at'], //gets all variables stored in the db
+
 			include: [
-				{
-					model: Comment,
-					attributes: [
-						'id',
-						'comment_text',
-						'post_id',
-						'user_id',
-						'created_at',
-					], //includes the comments that are stored on posts
-					include: {
-						model: User,
-						attributes: ['username'],
-					},
-				},
-				{
-					model: User,
-					attributes: ['username'], //gets the username attached to a post
-				},
+				User
 			],
 		});
 		const posts = findPosts.map((post) => post.get({ plain: true }));
-		res.render('homepage', { posts, loggedIn: req.session.loggedIn }); //after the above, we map over the array of posts and render out the homepage located in views.
+		res.render('homepage', { posts, logged_in: req.session.logged_in }); //after the above, we map over the array of posts and render out the homepage located in views.
 	} catch (err) {
 		console.log(err);
 		res.status(500).json(err);
@@ -36,10 +19,10 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-	if (req.session.loggedIn) {
-		res.redirect('/');
-		return; //if person is logged in, redirect to home page.
-	}
+	// if (req.session.logged_in) {
+	// 	res.redirect('/');
+	// 	return; //if person is logged in, redirect to home page.
+	// }
 	res.render('login'); //if not, render the login page.
 });
 
@@ -49,86 +32,70 @@ router.get('/signup', (req, res) => {
 
 router.get('/post/:id', async (req, res) => {
 	try {
-		const postbyID = await Post.findOne({
-			where: {
-				id: req.params.id,
-			},
-			attributes: ['id', 'content', 'title', 'created_at'],
-			include: [
+		const postbyID = await Post.findByPk(req.params.id, {
+
+			include: [ User,
 				{
 					model: Comment,
-					attributes: [
-						'id',
-						'comment_text',
-						'post_id',
-						'user_id',
-						'created_at',
-					],
-					include: {
-						model: User,
-						attributes: ['username'],
-					},
-				},
-				{
-					model: User,
-					attributes: ['username'],
-				},
+
+					include:[User],
+				}
 			],
 		});
-		const singlepost = await postbyID;
-		if (!singlepost) {
+
+		if (!postbyID) {
 			res.status(404).json({ message: 'No post found with this id' });
 			return;
 		}
-		const post = singlepost.get({ plain: true });
+		const post = postbyID.get({ plain: true });
 		console.log(post);
-		res.render('single-post', { post, loggedIn: req.session.loggedIn }); //This is similar to how the homepage works, except if we click on a post it instead renders the individual post!
+		res.render('single-post', { post, loggedIn: req.session.logged_in }); //This is similar to how the homepage works, except if we click on a post it instead renders the individual post!
 	} catch (err) {
 		console.log(err);
 		res.status(500).json(err);
 	}
 });
 
-router.get('/posts-comments', async (req, res) => {
-	try {
-		const findComment = await Post.findOne({
-			where: {
-				id: req.params.id,
-			},
-			attributes: ['id', 'content', 'title', 'created_at'],
-			include: [
-				{
-					model: Comment,
-					attributes: [
-						'id',
-						'comment_text',
-						'post_id',
-						'user_id',
-						'created_at',
-					],
-					include: {
-						model: User,
-						attributes: ['username'],
-					},
-				},
-				{
-					model: User,
-					attributes: ['username'],
-				},
-			],
-		});
-		const findnewComment = await findComment;
-		if (!findnewComment) {
-			res.status(404).json({ message: 'No post found with this id' });
-			return;
-		}
-		const post = findnewComment.get({ plain: true });
+// router.get('/posts-comments', async (req, res) => {
+// 	try {
+// 		const findComment = await Post.findOne({
+// 			where: {
+// 				id: req.params.id,
+// 			},
+// 			attributes: ['id', 'content', 'title', 'created_at'],
+// 			include: [
+// 				{
+// 					model: Comment,
+// 					attributes: [
+// 						'id',
+// 						'comment_text',
+// 						'post_id',
+// 						'user_id',
+// 						'created_at',
+// 					],
+// 					include: {
+// 						model: User,
+// 						attributes: ['username'],
+// 					},
+// 				},
+// 				{
+// 					model: User,
+// 					attributes: ['username'],
+// 				},
+// 			],
+// 		});
+// 		const findnewComment = await findComment;
+// 		if (!findnewComment) {
+// 			res.status(404).json({ message: 'No post found with this id' });
+// 			return;
+// 		}
+// 		const post = findnewComment.get({ plain: true });
 
-		res.render('posts-comments', { post, loggedIn: req.session.loggedIn });
-	} catch (err) {
-		console.log(err);
-		res.status(500).json(err);
-	}
-});
+// 		res.render('posts-comments', { post, loggedIn: req.session.logged_in });
+// 	} catch (err) {
+// 		console.log(err);
+// 		res.status(500).json(err);
+// 	}
+// });
 
 module.exports = router;
