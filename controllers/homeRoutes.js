@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
 			],
 		});
 		const posts = findPosts.map((post) => post.get({ plain: true }));
-		res.render('homepage', { posts, logged_in: req.session.logged_in }); //after the above, we map over the array of posts and render out the homepage located in views.
+		res.render('homepage', { posts, loggedIn: req.session.loggedIn }); //after the above, we map over the array of posts and render out the homepage located in views.
 	} catch (err) {
 		console.log(err);
 		res.status(500).json(err);
@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-	// if (req.session.logged_in) {
+	// if (req.session.loggedIn) {
 	// 	res.redirect('/');
 	// 	return; //if person is logged in, redirect to home page.
 	// }
@@ -49,7 +49,7 @@ router.get('/post/:id', async (req, res) => {
 		}
 		const post = postbyID.get({ plain: true });
 		console.log(post);
-		res.render('single-post', { post, loggedIn: req.session.logged_in }); //This is similar to how the homepage works, except if we click on a post it instead renders the individual post!
+		res.render('single-post', { post, loggedIn: req.session.loggedIn }); //This is similar to how the homepage works, except if we click on a post it instead renders the individual post!
 	} catch (err) {
 		console.log(err);
 		res.status(500).json(err);
@@ -69,8 +69,8 @@ router.get('/post/:id', async (req, res) => {
 // 					attributes: [
 // 						'id',
 // 						'comment_text',
-// 						'post_id',
-// 						'user_id',
+// 						'postId',
+// 						'userId',
 // 						'created_at',
 // 					],
 // 					include: {
@@ -91,7 +91,7 @@ router.get('/post/:id', async (req, res) => {
 // 		}
 // 		const post = findnewComment.get({ plain: true });
 
-// 		res.render('posts-comments', { post, loggedIn: req.session.logged_in });
+// 		res.render('posts-comments', { post, loggedIn: req.session.loggedIn });
 // 	} catch (err) {
 // 		console.log(err);
 // 		res.status(500).json(err);

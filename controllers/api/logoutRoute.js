@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { User } = require('../../models');
 
 router.post('/', (req, res) => {
-    if (req.session.logged_in) {
+    if (req.session.loggedIn) {
 
         // Removes all session data on logout
         req.session.destroy(() => {

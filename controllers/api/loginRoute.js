@@ -23,8 +23,8 @@ router.post('/', async (req, res) => {
 
         // Session variables based on the current logged in user
         req.session.save(() => {
-            req.session.user_id = userCheck.id;
-            req.session.logged_in = true;
+            req.session.userId = userCheck.id;
+            req.session.loggedIn = true;
 
             res.json({ user: userCheck, message: `You're logged in` })
         });
@@ -58,9 +58,9 @@ router.post('/login', async (req, res) => {
         }
 
         req.session.save(() => {
-            req.session.user_id = userData.id;
+            req.session.userId = userData.id;
             req.session.username = userData.username;
-            req.session.logged_in = true;
+            req.session.loggedIn = true;
 
             res.status(200).json({
                 userData,
@@ -74,7 +74,7 @@ router.post('/login', async (req, res) => {
 
 
 router.post('/logout', (req, res) => {
-    if (req.session.logged_in) {
+    if (req.session.loggedIn) {
 
         // Removes all session data on logout
         req.session.destroy(() => {
