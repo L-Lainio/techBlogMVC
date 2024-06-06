@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../conf/connections.js');
 
-
+/*
 // Import Sequelize and create a new instance
 const { Sequelize } = require('sequelize');
 const newSequelize = new Sequelize({
@@ -26,11 +26,11 @@ sequelize.sync()
     })
     .catch((error) => {
         console.error('Error synchronizing model:', error);
-    });
+    }); */
 
-class Comments extends Model { }
+class Comment extends Model { }
 
-Comments.init(
+Comment.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -43,7 +43,7 @@ Comments.init(
                 len: [3],
             },
         },
-        user_id: {
+        /*user_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
@@ -58,14 +58,14 @@ Comments.init(
                 model: 'Post', // Update the model name to match your actual Post model
                 key: 'id',
             },
-        },
+        }, */
     },
     {
         sequelize,
-        modelName: 'Comment',
+        modelName: 'comment',
         freezeTableName: true,
         underscored: true,
     }
 );
 
-module.exports = Comments;
+module.exports = Comment;

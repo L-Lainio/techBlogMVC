@@ -1,44 +1,44 @@
 const User = require('./User');
 const Post = require('./Post');
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../conf/connections');
-// const Comment = require('./Comments');
+//const { Model, DataTypes } = require('sequelize');
+//const sequelize = require('../conf/connections');
+const Comment = require('./Comment');
 
-class UserModel extends Model { }
-class PostModel extends Model { }
+/*class UserModel extends Model { }
+class PostModel extends Model { }*/
 
 // create associations
-// User.hasMany(Post, {
-//     foreignKey: 'user_id',
-//     // onDelete: 'cascade',
-// });
+/*User.hasMany(Post, {
+    foreignKey: 'user_id',
+    // onDelete: 'cascade',
+});
+*/
+Post.belongsTo(User, {
+    foreignKey: 'userId',
+    onDelete: 'CASCADE',
+});
 
-// Post.belongsTo(User, {
-//     foreignKey: 'user_id',
-//     // onDelete: 'cascade',
-// });
+/*User.hasMany(Comment, {
+    foreignKey: 'userId',
+    onDelete: 'cascade',
+});*/
 
-// User.hasMany(Comment, {
-//     foreignKey: 'user_id',
-//     onDelete: 'cascade',
-// });
+Comment.belongsTo(User, {
+    foreignKey: 'userId',
+    onDelete: 'cascade',
+});
 
-// Comment.belongsTo(User, {
-//     foreignKey: 'user_id',
-//     // onDelete: 'cascade',
-// });
+Post.hasMany(Comment, {
+    foreignKey: 'postId',
+    onDelete: 'CASCADE'
+});
 
-// Post.hasMany(Comment, {
-//     foreignKey: 'postId',
-//     onDelete: 'CASCADE'
-// });
+/*Comment.belongsTo(Post, {
+    foreignKey: 'post_id',
+    onDelete: 'cascade',
+});*/
 
-// Comment.belongsTo(Post, {
-//     foreignKey: 'post_id',
-//     onDelete: 'cascade',
-// });
-
-UserModel.init(User.initAttributes, {
+/*UserModel.init(User.initAttributes, {
     sequelize,
     modelName: 'user',
     timestamps: false,
@@ -53,6 +53,6 @@ PostModel.init(Post.initAttributes, {
 });
 
 UserModel.hasMany(PostModel, { foreignKey: 'user_id' });
-PostModel.belongsTo(UserModel, { foreignKey: 'user_id' });
+PostModel.belongsTo(UserModel, { foreignKey: 'user_id' }); */
 
-module.exports = { User, Post};
+module.exports = { User, Post, Comment};
