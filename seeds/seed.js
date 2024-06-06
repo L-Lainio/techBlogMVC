@@ -20,7 +20,7 @@ const seedDatabase = async () => {
         // console.log('Users seeded successfully');
 
         // Seed posts after users
-        const posts = await Post.bulkCreate(postData, {
+        const posts = await somePost.bulkCreate(postData, {
             individualHooks: true,
             returning: true,
 

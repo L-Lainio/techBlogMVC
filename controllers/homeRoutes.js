@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
 				User
 			],
 		});
-		const posts = findPosts.map((post) => post.get({ plain: true }));
+		const posts = userFindPosts.map((post) => post.get({ plain: true }));
 		res.render('homepage', { posts, loggedIn: req.session.loggedIn }); //after the above, we map over the array of posts and render out the homepage located in views.
 	} catch (err) {
 		console.log(err);

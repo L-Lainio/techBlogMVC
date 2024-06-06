@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 			}]
 		});
 
-		const posts = user.map((post) => post.get({ plain: true }));
+		const posts = await userData.map((post) => post.get({ plain: true }));
 		res.render('dashboard', { posts, loggedIn: true });
 	} catch (err) {
 		console.log(err);
