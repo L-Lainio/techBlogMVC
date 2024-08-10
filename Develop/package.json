@@ -6,9 +6,16 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "node server.js",
-        "seed": "node seeds/seed.js"
+        "seed": "node seeds/seed.js",
+        "migrate:up": "npx sequelize-cli db:migrate",
+        "migrate:undo": "npx sequelize-cli db:migrate:undo"
+    }
     },
-    "keywords": [],
+    "keywords": [
+        "express-handlebars",
+        "npm",
+        "express"
+    ],
     "author": "Lora Lainio",
     "license": "MIT",
     "dependencies": {
