@@ -1,76 +1,37 @@
-'use strict';
+// Importing Sequelize models
+const User = require('./User.js');
+const Post = require('./Post.js');
+const Comment = require('./Comment.js');
 
-const fs = require('fs');
-const path = require('path');
-const Sequelize = require('sequelize');
-const process = require('process');
-const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.json')[env];
-const db = {};
-const { user, Post, Comment } = require('sequelize');
-const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
-
-let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
-
-fs
-  .readdirSync(__dirname)
-  .filter(file => {
-    return (
-      file.indexOf('.') !== 0 &&
-      file !== basename &&
-      file.slice(-3) === '.js' &&
-      file.indexOf('.test.js') === -1
-    );
-  })
-  .forEach(file => {
-    db[model.name] = model;
-  });
-
-const { User, Post, Comment } = db;
-
-User.hasMany(Post, {
-  foreignKey: 'user_id'
-});
-
-User.hasMany(Comment, {
-  foreignKey: 'user_id'
-});
-
-Post.belongsTo(User, {
-  foreignKey: 'user_id'
-});
-
+// Post has many Comments
 Post.hasMany(Comment, {
-  foreignKey: 'post_id'
+  foreignKey: 'post_id',
+  onDelete: 'CASCADE',
 });
 
-Comment.belongsTo(User, {
-  foreignKey: 'user_id'
-});
-
+// Comment belongs to a Post
 Comment.belongsTo(Post, {
-  foreignKey: 'post_id'
+  foreignKey: 'post_id',
 });
 
-module.exports = {
-  User,
-  Post,
-  Comment
-};
-
-Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
-  }
+// User has many Posts
+User.hasMany(Post, {
+  foreignKey: 'user_id',
 });
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
+// Post belongs to a User
+Post.belongsTo(User, {
+  foreignKey: 'user_id',
+});
 
-module.exports = db;
+// User has many Comments
+User.hasMany(Comment, {
+  foreignKey: 'user_id',
+});
+
+// Comment belongs to a User
+Comment.belongsTo(User, {
+  foreignKey: 'user_id',
+});
+
+module.exports = { Post, Comment, User };

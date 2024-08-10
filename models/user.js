@@ -3,33 +3,23 @@ const bcrypt = require('bcrypt');
 const sequelize = require('../../config/connections');
 
 'use strict';
-module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
 
-    /**
-     * Check if the provided password matches the user's password.
-     * @param {string} loginPw - The password to check.
-     * @returns {boolean} - True if the password matches, false otherwise.
-     */
-    checkPassword(loginPw) {
-      return bcrypt.compareSync(loginPw, this.password);
-    }
+class User extends Model {
+  // method to validate password
+  checkPassword(loginPw) {
+    return bcrypt.compareSync(loginPw, this.password);
   }
-  User.init({
-    id: {
+}
+// initialize the User model
+User.init(
+  {
+    user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
     },
+
     username: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -42,6 +32,16 @@ module.exports = (sequelize, DataTypes) => {
         isEmail: true,
       },
     },
+    created_at: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+    active_ind: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: '1',
+    },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -49,20 +49,29 @@ module.exports = (sequelize, DataTypes) => {
         len: [6],
       },
     },
-  }, {
+  },
+  {
     hooks: {
       async beforeCreate(newUserData) {
         newUserData.password = await bcrypt.hash(newUserData.password, 10);
         return newUserData;
       },
+      async beforeUpdate(updatedUserData, options) {
+        if (updatedUserData.changed('password')) {
+          const hashedPassword = await bcrypt.hash(updatedUserData.password, 10); // Hashing the updated password with bcrypt
+          updatedUserData.password = hashedPassword;
+        }
+        return updatedUserData;
+      },
     },
+
+    // Configuring Sequelize settings for the model
     sequelize,
     timestamps: false,
     freezeTableName: true,
-    underscored: true,
-    modelName: 'user',
-  });
+    underscored: true, 
+  }
+);
 
-  return User;
-};
+// Exporting the User model for use in other parts of the application
 module.exports = User;

@@ -5,19 +5,30 @@ const {
     Post,
     Comment
 } = require('../Develop/models');
+const withAuth = require('../utils/auth');
 
+// Log in route (GET to render login page)
+router.get('/login', (req, res) => {
+    // Check if the user is already logged in, redirect to the homepage if true
+    if (req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
+    // Render the login page
+    res.render('login');
+});
 
 router.get('/', (req, res) => {
     Post.findAll({
         attributes: [
-            'id',
-            'title',
-            'content',
+            'post_id',
+            'post_title',
+            'post_content',
             'created_at'
         ],
         include: [{
             model: Comment,
-            attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+            attributes: ['comment_id', 'comment_content', 'post_id', 'user_id', 'created_at'],
             include: {
                 model: User,
                 attributes: ['username']
@@ -48,41 +59,45 @@ router.get('/', (req, res) => {
 router.get('/post/:id', (req, res) => {
     Post.findOne({
         where: {
-            id: req.params.id
+            post_id: req.params.id
         },
         attributes: [
-            'id',
-            'title',
-            'content',
+            'post_id',
+            'post_title',
+            'post_content',
             'created_at'
         ],
-        include: [{
-            model: Comment,
-            attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-            include: {
+        include: [
+            {
+                model: Comment,
+                attributes: [
+                    'comment_id',
+                    'comment_content',
+                    'post_id',
+                    'user_id',
+                    'created_at'
+                ],
+                include: {
+                    model: User,
+                    attributes: ['username']
+                }
+            },
+            {
                 model: User,
                 attributes: ['username']
             }
-        },
-        {
-            model: User,
-            attributes: ['username']
-        }
         ]
     })
         .then(dbPostData => {
             if (!dbPostData) {
-                res.status(404).json({
-                    message: 'No post found with this id'
-                });
+                res.status(404).json({ message: 'No Post found with this id' });
                 return;
             }
+            // Serialize the data
+            const post = dbPostData.get({ plain: true });
 
-            const post = dbPostData.get({
-                plain: true
-            });
-
-            res.render('single-post', {
+            // Pass data to the template
+            res.render('singlePost', {
                 post,
                 loggedIn: req.session.loggedIn
             });
