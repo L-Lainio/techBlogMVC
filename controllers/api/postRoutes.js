@@ -3,8 +3,8 @@ const {
     User,
     Post,
     Comment
-} = require('../../models');
-const withAuth = require('../../utils/auth');
+} = require('../../Develop/models');
+const withAuth = require('../../Develop/utils/auth');
 
 
 // Get all posts

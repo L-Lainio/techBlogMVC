@@ -8,6 +8,8 @@ const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
+const { user, Post, Comment } = require('sequelize');
+const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
 
 let sequelize;
 if (config.use_env_variable) {
@@ -27,9 +29,40 @@ fs
     );
   })
   .forEach(file => {
-    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
     db[model.name] = model;
   });
+
+const { User, Post, Comment } = db;
+
+User.hasMany(Post, {
+  foreignKey: 'user_id'
+});
+
+User.hasMany(Comment, {
+  foreignKey: 'user_id'
+});
+
+Post.belongsTo(User, {
+  foreignKey: 'user_id'
+});
+
+Post.hasMany(Comment, {
+  foreignKey: 'post_id'
+});
+
+Comment.belongsTo(User, {
+  foreignKey: 'user_id'
+});
+
+Comment.belongsTo(Post, {
+  foreignKey: 'post_id'
+});
+
+module.exports = {
+  User,
+  Post,
+  Comment
+};
 
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
