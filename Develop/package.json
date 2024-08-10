@@ -1,7 +1,7 @@
 {
     "name": "tech-blog",
     "version": "1.0.0",
-    "description": "",
+    "description": "Model-View-Controller (MVC) Challenge: Tech Blog",
     "main": "server.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,8 +9,8 @@
         "seed": "node seeds/seed.js"
     },
     "keywords": [],
-    "author": "",
-    "license": "ISC",
+    "author": "Lora Lainio",
+    "license": "MIT",
     "dependencies": {
         "bcrypt": "^5.0.0",
         "connect-session-sequelize": "^7.0.4",
@@ -25,5 +25,13 @@
         "eslint": "^7.12.1",
         "eslint-config-prettier": "^6.15.0",
         "prettier": "^2.1.2"
-    }
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/L-Lainio/techBlogMVC.git"
+    },
+    "bugs": {
+        "url": "https://github.com/L-Lainio/techBlogMVC/issues"
+    },
+    "homepage": "https://github.com/L-Lainio/techBlogMVC#readme"
 }
