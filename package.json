@@ -1,0 +1,24 @@
+{
+  "name": "techblogmvc",
+  "version": "1.0.0",
+  "description": "Model-View-Controller (MVC): Tech Blog",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \\\"Error: no test specified\\\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/L-Lainio/techBlogMVC.git"
+  },
+  "keywords": [
+    "express-handlebars",
+    "npm",
+    "express"
+  ],
+  "author": "Lora Lainio",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/L-Lainio/techBlogMVC/issues"
+  },
+  "homepage": "https://github.com/L-Lainio/techBlogMVC#readme"
+}
