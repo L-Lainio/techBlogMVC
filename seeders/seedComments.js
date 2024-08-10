@@ -1,8 +1,15 @@
 const { Comment } = require('../models');
 
 const commentData = [
-    // Blank array
-    {}
+
+    {
+        comment_id: '/',
+        comment_content: '/',
+        format_date: '/',
+        active_ind: '/',
+        user_id: '/',
+        post_id: '/',
+    },
 
 ];
 
