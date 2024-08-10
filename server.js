@@ -14,8 +14,13 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 const sess = {
-    secret: 'Super secret secret', // Provide a secret here
-    cookie: {},
+    secret: 'Super secret secret',
+    cookie: {
+        maxAge: 300000,
+        httpOnly: true,
+        secure: false,
+        sameSite: 'strict',
+    },
     resave: false,
     saveUninitialized: true,
     store: new SequelizeStore({
@@ -23,10 +28,20 @@ const sess = {
     })
 };
 
+// Use session middleware with the defined configuration
 app.use(session(sess));
 
-// Other middleware and routes
+// Inform Express.js on which template engine to use
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
 
+// Middlewares
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Define routes
+app.use(routes);
 sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () => console.log(`App listening on port ${PORT}!`));
 });

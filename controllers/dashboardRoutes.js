@@ -5,7 +5,7 @@ const {
     User,
     Comment
 } = require('../Develop/models');
-const withAuth = require('../Develop/utils/auth');
+const withAuth = require('../utils/auth');
 
 
 router.get('/', withAuth, (req, res) => {
