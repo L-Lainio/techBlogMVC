@@ -1,6 +1,5 @@
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes } = require('../../config/connections');
 const bcrypt = require('bcrypt');
-const sequelize = require('../../config/connections');
 
 'use strict';
 
@@ -69,7 +68,7 @@ User.init(
     sequelize,
     timestamps: false,
     freezeTableName: true,
-    underscored: true, 
+    underscored: true,
   }
 );
 

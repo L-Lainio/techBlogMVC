@@ -105,7 +105,7 @@ router.put('/:id', async (req, res) => {
             res.status(404).json({ error: 'Error has occurred' });
             return;
         }
-        
+
         // Respond with a success message
         res.status(201).json({ message: 'Post updated successfully.' });
     } catch (err) {
