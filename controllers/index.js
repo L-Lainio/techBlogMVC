@@ -1,4 +1,5 @@
-const router = require('express').Router();
+const express = require('express');
+const router = express.Router();
 const apiRoutes = require('./api/index.js');
 const homeRoutes = require('./homeRoutes.js');
 const dashboardRoutes = require('./dashboardRoutes.js');
@@ -10,7 +11,7 @@ router.use('/', homeRoutes);
 
 
 router.use((req, res) => {
-    res.status(404).end();
+    res.status(404).render('all');
 });
 
 

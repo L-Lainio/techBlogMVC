@@ -1,8 +1,9 @@
 // Importing the Express framework and the User model
-const router = require('express').Router();
 const { User, Post, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 const bcrypt = require('bcrypt');
+const express = require('express');
+const router = express.Router();
 
 // Log in route (POST to handle login logic)
 router.post('/login', async (req, res) => {

@@ -1,10 +1,10 @@
 const router = require('express').Router();
-const sequelize = require('../config/connections');
+const sequelize = require('../config/connection');
 const {
     User,
     Post,
     Comment
-} = require('../Develop/models');
+} = require('../models');
 const withAuth = require('../utils/auth');
 
 // Log in route (GET to render login page)

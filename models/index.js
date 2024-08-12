@@ -1,5 +1,6 @@
 // Importing Sequelize models
-const User = require('./User.js');
+const sequelize = require('../config/connection'); // Ensure this path is correct
+const User = require('./User');
 const Post = require('./Post.js');
 const Comment = require('./Comment.js');
 
