@@ -1,55 +1,45 @@
-const {
-    Model,
-    DataTypes
-} = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
+const User = require('./User');
+const Post = require('./Post');
 
+class Comment extends Model {}
 
-class Comment extends Model { }
-
-Comment.init({
-    comment_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-        autoIncrement: true
+Comment.init(
+    {
+        comment_id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
+        },
+        comment_text: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        user_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'Users',
+                key: 'user_id',
+            },
+        },
+        post_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'Posts',
+                key: 'post_id',
+            },
+        },
     },
-    comment_text: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            len: [1]
-        }
-    },
-    creater_at: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW,
-
-    },
-
-    user_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'user',
-            key: 'user_id'
-        }
-    },
-    post_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'post',
-            key: 'post_id'
-        }
+    {
+        sequelize,
+        modelName: 'Comment',
+        tableName: 'Comments',
+        timestamps: true,
     }
-}, {
-    sequelize,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'comment'
-})
+);
 
+Comment.belongsTo(User, { foreignKey: 'user_id' });
+Comment.belongsTo(Post, { foreignKey: 'post_id' });
 
 module.exports = Comment;
