@@ -14,9 +14,8 @@ User.init(
   {
     user_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
       autoIncrement: true,
+      primaryKey: true,
     },
     username: {
       type: DataTypes.STRING,
@@ -26,9 +25,6 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
-      validate: {
-        isEmail: true,
-      },
     },
     password: {
       type: DataTypes.STRING,
@@ -38,6 +34,8 @@ User.init(
   {
     sequelize,
     modelName: 'User',
+    tableName: 'Users',
+    timestamps: true,
   }
 );
 

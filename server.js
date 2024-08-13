@@ -12,6 +12,8 @@ const postRoutes = require('./controllers/api/postRoutes');
 const userRoutes = require('./controllers/api/userRoutes');
 const dashboardRoutes = require('./controllers/dashboardRoutes');
 const apiRoutes = require('./controllers/api');
+const User = require('./models/User');
+const Post = require('./models/Post');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -49,7 +51,8 @@ app.use('/users', userRoutes);
 app.use('/dashboard', dashboardRoutes);
 app.use('/api', apiRoutes);
 
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ force: true }).then(() => {
+    console.log('Database & tables created!');
     app.listen(PORT, () => {
         console.log('Server listening on: http://localhost:' + PORT);
     });
