@@ -1,8 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
-const User = require('./User');
+const sequelize = require('../config/connection'); // Adjust the path to your sequelize instance
 
-class Post extends Model { }
+class Post extends Model {}
 
 Post.init(
     {
@@ -19,22 +18,18 @@ Post.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        user_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'Users',
-                key: 'user_id',
-            },
+        created_at: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: DataTypes.NOW,
         },
     },
     {
         sequelize,
         modelName: 'Post',
-        tableName: 'Posts',
-        timestamps: true,
+        tableName: 'posts',
+        timestamps: true, // Automatically adds createdAt and updatedAt fields
     }
 );
-
-Post.belongsTo(User, { foreignKey: 'user_id' });
 
 module.exports = Post;

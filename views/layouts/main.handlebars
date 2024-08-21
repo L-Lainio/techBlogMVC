@@ -4,46 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>✨ techBlogMVC ✨ </title>
-    <link rel="stylesheet" href="/public/css/style.css">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ title }} </title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
-
-    <div class="wrapper">
-<!-- Header section containing navigation and site title -->
-<header>
-    <div>
-        <!-- Navigation links -->
-        <nav>
-            <a href="/"> Home </a>
-            <a href="/dashboard"> Dashboard </a>
-
-            <!-- Conditional rendering based on user login status -->
-            {{#if loggedIn}}
-            <a href="/" id="logout"> Sign out </a>
-            {{else}}
-            <a href="/login"> Sign in </a>
-            {{/if}}
-        </nav>
-    </div>
-
-    <!-- Site title -->
-    <div>
-        <h1 class="home-title"> ⭐ MVC Tech Savvy ⭐ </h1>
-    </div>
-</header>
-
-    <!-- Main content of the webpage -->
-    <main>
-        {{{ body }}}
-    </main>
-
-  <footer> Leave your thoughts HERE 📍 </footer>
-    </div>
-
-  <!-- Only include the logout script if the user is logged in -->
-  {{#if loggedIn}}
-  <script src="/js/logout.js"></script>
-  {{/if}}
+<body>
+    {{!-- <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script> --}}
+    {{{ body }}}
+<script src="/public/js/logout.js"></script>
 </body>
-
 </html>

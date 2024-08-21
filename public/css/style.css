@@ -2,13 +2,15 @@
     box-sizing: border-box;
 }
 
-body,
-html {
-    height: 100%;
+body {
+    background: violet;
+    width: 100%;
+    height: 500px;
     padding: 0;
     margin: 0;
     font-family: sans-serif;
     color: #333;
+
 }
 
 main,

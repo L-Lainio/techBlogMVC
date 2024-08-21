@@ -2,22 +2,22 @@
   "development": {
     "username": "postgres",
     "password": "rootroot",
-    "database": "database_development",
+    "database": "techblogmvc_db",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
     "password": "rootroot",
-    "database": "database_test",
+    "database": "techblogmvc_db",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "postgres"
   },
   "production": {
     "username": "postgres",
     "password": "rootroot",
-    "database": "database_production",
+    "database": "techblogmvc_db",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "postgres"
   }
 }
