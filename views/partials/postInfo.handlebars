@@ -2,20 +2,20 @@
     <div class="whole-post">
         <div class="info-section">
             <div class="post-name">
-            <a href="/post/{{post_id}}">{{post_title}}</a>
+                <a href="/post/{{post.post_id}}">{{post.post_title}}</a>
             </div>
-        <!-- Meta Information Div -->
-        <div class="meta">
-            <!-- Posted By Information -->
-            Posted by {{user.username}} on {{format_date created_at}} |
+            <!-- Meta Information Div -->
+            <div class="meta">
+                <!-- Posted By Information -->
+                Posted by {{user.username}} on {{post.created_at}} |
 
-            <!-- Comment Information -->
-            {{comments.length}} {{format_plural "comment" comments.length}}
-        </div>
+                <!-- Comment Information -->
+                {{!-- {{comments.length}} {{format_plural "comment" comments.length}} --}}
+            </div>
         </div>
 
         <!-- Post content Div -->
         <div class="post-content">
-            {{post_content}}
+            {{post.post_content}}
         </div>
-        </article>
+</article>

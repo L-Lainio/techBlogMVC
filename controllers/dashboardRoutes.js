@@ -22,7 +22,7 @@ router.get('/', withAuth, (req, res) => {
             },
             {
                 model: Comment,
-                attributes: ['comment_id', 'comment_content', 'post_id', 'user_id', 'created_at'],
+                attributes: ['comment_id', 'comment_text', 'post_id', 'user_id', 'created_at'],
                 include: {
                     model: User,
                     attributes: ['username']
@@ -54,7 +54,7 @@ router.get('/edit/:id', withAuth, (req, res) => {
             },
             {
                 model: Comment, // Include the Comment model to get associated comments
-                attributes: ['comment_id', 'comment_content', 'post_id', 'user_id', 'created_at'],
+                attributes: ['comment_id', 'comment_text', 'post_id', 'user_id', 'created_at'],
                 include: {
                     model: User, // Include the User model for each comment to get the username
                     attributes: ['username']

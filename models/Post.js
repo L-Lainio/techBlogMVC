@@ -26,9 +26,9 @@ Post.init(
     },
     {
         sequelize,
-        modelName: 'Post',
-        tableName: 'posts',
-        timestamps: true, // Automatically adds createdAt and updatedAt fields
+        modelName: 'Posts',
+        tableName: 'Posts',
+        timestamps: false, // Automatically adds createdAt and updatedAt fields
     }
 );
 

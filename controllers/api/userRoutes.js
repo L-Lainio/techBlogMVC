@@ -71,7 +71,7 @@ router.get('/:id', (req, res) => {
             },
             {
                 model: Comment,
-                attributes: ['comment_id', 'comment_content', 'created_at']
+                attributes: ['comment_id', 'comment_text', 'created_at']
             }
         ]
     })

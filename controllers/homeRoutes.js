@@ -19,6 +19,8 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/', (req, res) => {
+    // to do Cody console log not showing up homepage rendering on 50???
+    console.log("*************************************");
     Post.findAll({
         attributes: [
             'post_id',
@@ -28,7 +30,7 @@ router.get('/', (req, res) => {
         ],
         include: [{
             model: Comment,
-            attributes: ['comment_id', 'comment_content', 'post_id', 'user_id', 'created_at'],
+            attributes: ['comment_id', 'comment_text', 'post_id', 'user_id', 'created_at'],
             include: {
                 model: User,
                 attributes: ['username']
@@ -44,7 +46,7 @@ router.get('/', (req, res) => {
             const posts = dbPostData.map(post => post.get({
                 plain: true
             }));
-
+            console.log(posts);
             res.render('homepage', {
                 posts,
                 loggedIn: req.session.loggedIn
@@ -72,7 +74,7 @@ router.get('/post/:id', (req, res) => {
                 model: Comment,
                 attributes: [
                     'comment_id',
-                    'comment_content',
+                    'comment_text',
                     'post_id',
                     'user_id',
                     'created_at'

@@ -17,7 +17,7 @@ router.post('/:post_id', withAuth, async (req, res) => {
     try {
         // Create a new comment associated with a specific post and user
         const newComment = await Comment.create({
-            comment_content: req.body.comment_content,
+            comment_text: req.body.comment_text,
             post_id: req.params.post_id,
             user_id: req.session.user_id,
         });

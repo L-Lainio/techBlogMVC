@@ -30,12 +30,16 @@ Comment.init(
                 key: 'post_id',
             },
         },
+        created_at: {
+            type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
+        },
     },
     {
         sequelize,
-        modelName: 'Comment',
+        modelName: 'Comments',
         tableName: 'Comments',
-        timestamps: true,
+        timestamps: false,
     }
 );
 
