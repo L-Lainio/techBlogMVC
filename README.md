@@ -70,12 +70,5 @@ By following these installation steps and setting up the necessary libraries and
 
 NOTICE: This application is covered under the MIT License
 
-© 2024 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+© 2026 and Beyond
 
-## Questions
-
-Have additional questions? Click the links below to reach me through my GitHub account or Email address.
-
-[Link to Github](https://github.com/L-Lainio)
-
-<a href="mailto:lora.lainio.it@gmail.com">lora.lainio.it@gmail.com</a>
